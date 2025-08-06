@@ -22,6 +22,45 @@ Each project has its own `requirements.txt` file with specific dependencies.
 
 ## Installation
 
+There are two ways to install the required dependencies:
+
+### Option 1: Using the Launcher Scripts (Recommended)
+
+The launcher scripts now include automatic dependency detection and installation:
+
+1. Clone this repository:
+```bash
+git clone <repository-url>
+cd <repository-directory>
+```
+
+2. Create a virtual environment (optional but recommended):
+```bash
+python -m venv .venv
+# On Windows
+.venv\Scripts\activate
+# On macOS/Linux
+source .venv/bin/activate
+```
+
+3. Run any of the launcher scripts:
+```bash
+python launcher.py
+# Or for a specific project
+python quantum_simulator/launcher.py
+```
+
+4. If Streamlit or other dependencies are missing, the launcher will:
+   - Detect the missing dependencies
+   - Ask if you want to install them automatically
+   - Install all required dependencies from the project's requirements.txt file
+
+This is the easiest way to get started, as the launcher handles all dependency management for you.
+
+### Option 2: Manual Installation
+
+If you prefer to install dependencies manually:
+
 1. Clone this repository:
 ```bash
 git clone <repository-url>
@@ -51,7 +90,49 @@ pip install -r quantum_tictactoe/requirements.txt
 
 ## Running the Projects
 
-### Quantum Circuit Simulator
+There are two ways to run the projects: using the launcher scripts or directly with Streamlit.
+
+### Using the Launcher Scripts (Recommended)
+
+The easiest way to run the projects is to use the launcher scripts, which will:
+- Automatically use the correct Streamlit command
+- Check if required dependencies are installed
+- Offer to install missing dependencies automatically
+- Provide clear feedback during the installation process
+- Work reliably on all operating systems, including Windows with spaces in the path
+
+#### Main Launcher
+
+To choose which project to run from a menu:
+
+```bash
+python launcher.py
+```
+
+This will display a menu where you can select which project to launch.
+
+#### Individual Project Launchers
+
+Each project also has its own launcher script:
+
+```bash
+# For Quantum Circuit Simulator
+python quantum_simulator/launcher.py
+
+# For Entanglement Visualizer
+python entanglement_visualizer/launcher.py
+
+# For Quantum Tic Tac Toe
+python quantum_tictactoe/launcher.py
+```
+
+If Streamlit or other dependencies are missing when you run a launcher script, you'll be prompted to install them automatically. This makes it easy to get started without having to manually install dependencies.
+
+### Using Streamlit Directly
+
+If you prefer, you can also run the projects directly with Streamlit:
+
+#### Quantum Circuit Simulator
 
 ```bash
 cd quantum_simulator
@@ -64,7 +145,7 @@ This will open a web interface where you can:
 - Run simulations
 - View measurement results and quantum states
 
-### Entanglement Visualizer
+#### Entanglement Visualizer
 
 ```bash
 cd entanglement_visualizer
@@ -77,7 +158,7 @@ This will open a web interface where you can:
 - Visualize correlations between entangled qubits
 - Explore Bell's inequality
 
-### Quantum Tic Tac Toe
+#### Quantum Tic Tac Toe
 
 ```bash
 cd quantum_tictactoe
@@ -89,6 +170,8 @@ This will open a web interface where you can:
 - Observe entanglement between positions
 - Force quantum collapses
 - Play against an AI opponent
+
+> **Note:** It's important to use the `streamlit run` command when running the applications directly, not `python`. The launcher scripts handle this automatically for you.
 
 ## Quantum Concepts
 
@@ -147,6 +230,24 @@ Quantum Tic Tac Toe introduces quantum mechanics to the classic game:
 - Players can force collapses strategically
 - The game visualizes quantum entanglement between positions
 - You can play against an AI with different difficulty levels
+
+## Troubleshooting
+
+### Common Issues
+
+#### "Error launching application: [WinError 2] The specified file was not found"
+This error can occur on Windows systems, especially when the project path contains spaces. The launcher scripts have been updated to handle this issue. If you still encounter this error:
+- Make sure Streamlit is properly installed in your Python environment
+- Try running the launcher script with administrator privileges
+- Ensure your Python environment is activated if you're using a virtual environment
+
+#### "ImportError: cannot import name 'Aer' from 'qiskit'"
+This error occurs because in newer versions of Qiskit, the Aer module has been moved to a separate package. To fix this:
+- Make sure you have the qiskit-aer package installed: `pip install qiskit-aer`
+- The launcher scripts should detect and install this dependency automatically
+
+#### "Session state does not function when running a script without `streamlit run`"
+This warning appears when trying to run a Streamlit app directly with Python instead of using the `streamlit run` command. Always use the launcher scripts or the `streamlit run` command to run the applications.
 
 ## Credits
 
