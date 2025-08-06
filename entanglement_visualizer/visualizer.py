@@ -34,8 +34,10 @@ def plot_correlation_matrix(correlation_matrix: np.ndarray, bases: List[str] = [
         colorscale='RdBu',
         zmid=0,  # Center the color scale at zero
         colorbar=dict(
-            title="Correlation",
-            titleside="right"
+            title=dict(
+                text="Correlation",
+                side="right"
+            )
         )
     ))
     
