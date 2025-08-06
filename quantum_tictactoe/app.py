@@ -130,6 +130,8 @@ def handle_cell_click(row, col):
     if (st.session_state.game_mode == "human_vs_ai" and 
         not st.session_state.game.is_game_over() and
         st.session_state.game.get_current_player() == "O"):
+        # Add a delay to allow users to see the graph before setting AI thinking
+        time.sleep(2)  # 2 second delay
         st.session_state.ai_thinking = True
         st.rerun()
 
@@ -150,6 +152,8 @@ def handle_collapse_click(move_index, position):
     if (st.session_state.game_mode == "human_vs_ai" and 
         not st.session_state.game.is_game_over() and
         st.session_state.game.get_current_player() == "O"):
+        # Add a delay to allow users to see the graph before setting AI thinking
+        time.sleep(2)  # 2 second delay
         st.session_state.ai_thinking = True
         st.rerun()
 
@@ -462,6 +466,8 @@ def main():
     
     # Make AI move if it's AI's turn
     if st.session_state.ai_thinking:
+        # Add a delay to allow users to see the graph before the AI move
+        time.sleep(2)  # 2 second delay
         make_ai_move()
         st.rerun()
 

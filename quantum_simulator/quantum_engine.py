@@ -139,7 +139,22 @@ class QuantumEngine:
         Returns:
             Dictionary mapping measurement outcomes to their counts
         """
-        transpiled_circuit = transpile(self.circuit, self.simulator)
+        # Check if the circuit has any measurements
+        has_measurements = False
+        for instruction in self.circuit.data:
+            if instruction.operation.name == 'measure':
+                has_measurements = True
+                break
+        
+        # If no measurements, add measurements to all qubits
+        if not has_measurements:
+            # Create a copy of the circuit to avoid modifying the original
+            circuit_copy = self.circuit.copy()
+            circuit_copy.measure_all()
+            transpiled_circuit = transpile(circuit_copy, self.simulator)
+        else:
+            transpiled_circuit = transpile(self.circuit, self.simulator)
+        
         job = self.simulator.run(transpiled_circuit, shots=shots)
         result = job.result()
         counts = result.get_counts()
